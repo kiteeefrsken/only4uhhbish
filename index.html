@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Story Game</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#box {
+    text-align: center;
+    width: 80%;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">
+    <div id="text">Did you come from Kite's YouTube link?</div>
+
+    <div id="buttons">
+        <button onclick="step('yes')">Yes</button>
+        <button onclick="step('no')">No</button>
+    </div>
+</div>
+
+<script>
+
+let stage = 1;
+
+function step(answer) {
+
+    // STEP 1
+    if (stage === 1) {
+        if (answer === "yes") {
+            document.getElementById("text").innerHTML = "What is your name?";
+            document.getElementById("buttons").innerHTML = `
+                <input id="nameInput" placeholder="Enter name">
+                <br><br>
+                <button onclick="checkName()">Submit</button>
+            `;
+            stage = 2;
+        } else {
+            document.getElementById("text").innerHTML = "Access denied.";
+            document.getElementById("buttons").innerHTML = "";
+        }
+    }
+
+    // STEP 3
+    else if (stage === 3) {
+
+        if (answer === "yes") {
+            document.getElementById("text").innerHTML = "Sorry... I wanted to tell you something.";
+        } else {
+            document.getElementById("text").innerHTML = "Okay, okay good.";
+        }
+
+        setTimeout(finalMsg, 1500);
+    }
+}
+
+// NAME CHECK
+function checkName() {
+    let name = document.getElementById("nameInput").value.toLowerCase().trim();
+
+    if (name === "ayesha") {
+        document.getElementById("text").innerHTML = "Are you mad at me?";
+        document.getElementById("buttons").innerHTML = `
+            <button onclick="step('yes')">Yes</button>
+            <button onclick="step('no')">No</button>
+        `;
+        stage = 3;
+    } else {
+        document.getElementById("text").innerHTML = "Wrong person.";
+        document.getElementById("buttons").innerHTML = "";
+    }
+}
+
+// FINAL MESSAGE
+function finalMsg() {
+    document.getElementById("text").innerHTML = "bish i love u can't you understand this";
+    document.getElementById("buttons").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>
